@@ -6,15 +6,15 @@ interface Blog extends Document {
     content:string,
     author:string,
     category:string,
-    thumbnailUrl:string,
-   readtime:number
+    coverImg:string,
+    readtime:number
   }
 const blogSchema = new mongoose.Schema<Blog>({
     title: { type: String, required: true },
     content: { type:String , required: true },
     author: { type: String, required: true },
     category:{type:String , required:true},
-    thumbnailUrl: { type: String, required: true },
+    coverImg: { type: String, required: true },
     readtime: { type: Number, required: true } 
 })
 

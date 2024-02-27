@@ -2,30 +2,31 @@ import { Request, Response } from "express";
 import { body, validationResult } from "express-validator";
 import * as apiResponse from "../../helper/apiResponse";
 import WorkoutModel from "../../models/workoutModel";
+import { upload } from "../../helper/multerConfig";
 
 
 const addWorkout = [
+
+  upload.single('thumbnail'),
+
+
   body("title")
     .notEmpty({ ignore_whitespace: true })
-    .withMessage("UserName is required"),
+    .withMessage("title is required"),
   body("category")
     .notEmpty({ ignore_whitespace: true })
-    .withMessage("First Name is required"),
-  body("subCategory")
-    .notEmpty({ ignore_whitespace: true })
-    .withMessage("Last Name is required"),
+    .withMessage("category is required"),
   body("explanation")
     .notEmpty({ ignore_whitespace: true })
-    .withMessage("role is required"),
+    .withMessage("explanation is required"),
   body("difficultyLevel")
     .notEmpty({ ignore_whitespace: true })
-    .withMessage("role is required"),
-  body("thumbnailUrl")
-    .notEmpty({ ignore_whitespace: true })
-    .withMessage("password_required"),
+    .withMessage("difficultyLevel is required"),
   body("videoUrl")
     .notEmpty({ ignore_whitespace: true })
-    .withMessage("password_required"),
+    .withMessage("video required"),
+
+    
 
   async (req: Request, res: Response) => {
     const errors = validationResult(req);
@@ -43,7 +44,6 @@ const addWorkout = [
       subCategory,
       explanation,
       difficultyLevel,
-      thumbnailUrl,
       videoUrl,
     } = req.body;
     try {
@@ -53,7 +53,7 @@ const addWorkout = [
         subCategory,
         explanation,
         difficultyLevel,
-        thumbnailUrl,
+        thumbnail:req.file?.path,
         videoUrl,
       });
       workout.save();
@@ -69,3 +69,4 @@ const addWorkout = [
 ];
 
 export default addWorkout;
+

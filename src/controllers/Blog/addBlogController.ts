@@ -2,10 +2,15 @@ import { Request, Response } from "express";
 import { body, validationResult } from "express-validator";
 import * as apiResponse from "../../helper/apiResponse";
 import BlogModel from "../../models/blogModel";
+import { upload } from "../../helper/multerConfig";
 
 
 
 const addBlog = [
+
+  upload.single('coverImg'),
+
+  
   body("title")
     .notEmpty({ ignore_whitespace: true })
     .withMessage("title is required"),
@@ -18,9 +23,6 @@ const addBlog = [
   body("category")
     .notEmpty({ ignore_whitespace: true })
     .withMessage("category is required"),
-  body("thumbnailUrl")
-    .notEmpty({ ignore_whitespace: true })
-    .withMessage("image required"),
   body("readtime")
     .notEmpty({ ignore_whitespace: true })
     .withMessage("read time required"),
@@ -36,12 +38,11 @@ const addBlog = [
     }
 
     const {
-     title,
-     content,
-     author,
-     category,
-     thumbnailUrl,
-   readtime
+      title,
+      content,
+      author,
+      category,
+      readtime
     } = req.body;
     try {
       const blog = await BlogModel.create({
@@ -49,7 +50,7 @@ const addBlog = [
         content,
         author,
         category,
-        thumbnailUrl,
+        coverImg: req.file?.path,
         readtime
       });
       blog.save();

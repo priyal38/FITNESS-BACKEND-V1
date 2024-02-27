@@ -12,10 +12,13 @@ connection();
 const app = express();
 app.use(json());
 app.use(cors())
- 
+
+app.use('/uploads' , express.static('./uploads'))
+
 
 app.use('/api', indexroute)
 const PORT = 5000;
+
  
 app.listen(PORT , ()=>{
     console.log(`Server is running on ${PORT}`)
