@@ -25,12 +25,9 @@ const addRecipe = [
             description,
             mealType,
             dietaryType,
-            calories,
-            carbohydrates,
+            nutritionFacts,
             prepTime,
             cookTime,
-            protein,
-            totalfat,
             instructions,
             ingredients
         } = req.body;
@@ -40,12 +37,9 @@ const addRecipe = [
                 description,
                 mealType,
                 dietaryType,
-                calories,
-                carbohydrates,
                 prepTime,
                 cookTime,
-                protein,
-                totalfat,
+                nutritionFacts,
                 instructions,
                 ingredients,
                 image: req.file?.path

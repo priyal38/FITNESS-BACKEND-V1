@@ -1,12 +1,22 @@
 import mongoose, { Schema, Document } from 'mongoose';
 
 
+export interface NutritionFacts {
+  calories: number;
+  carbohydrates: number;
+  protein: number;
+  totalfat: number;
+}
 export interface Ingredient {
   name: string;
   quantity: string;
+  unit:string
 
 }
 
+export interface Instructions{
+  step:string
+}
 export interface HealthyRecipes extends Document {
   title: string;
   description?: string;
@@ -14,12 +24,9 @@ export interface HealthyRecipes extends Document {
   dietaryType?: string;
   prepTime: number;
   cookTime: number;
-  calories: number;
-  carbohydrates: number;
-  protein: number;
-  totalfat: number
+  nutritionFacts: NutritionFacts;
   ingredients: Ingredient[];
-  instructions: string[];
+  instructions: Instructions[];
   image: string
 }
 
@@ -30,17 +37,20 @@ const HealthyRecipesSchema = new mongoose.Schema<HealthyRecipes>({
   dietaryType: { type: String, required: true },
   prepTime: { type: Number, required: true },
   cookTime: { type: Number, required: true },
-  calories: { type: Number, required: true },
-  carbohydrates: { type: Number, required: true },
-  protein: { type: Number, required: true },
-  totalfat: { type: Number, required: true },
+  nutritionFacts: {
+    calories: { type: Number, required: true },
+    carbohydrates: { type: Number, required: true },
+    protein: { type: Number, required: true },
+    fat: { type: Number, required: true }
+},
   ingredients: [{
-    name: { type: String, required: true },
-    quantity: { type: String, required: true },
+  name: { type: String, required: true },
+  quantity: { type: String, required: true },
+  unit:{ type: String }
 
   }],
-  instructions: [{ type: String, required: true }],
-  image: { type: String, required: true }
+  instructions: [ {step:{ type: String, required: true }}],
+  image: { type: String,  }
 });
 
 const HealthyRecipesModel = mongoose.model<HealthyRecipes>("HealthyRecipes", HealthyRecipesSchema)

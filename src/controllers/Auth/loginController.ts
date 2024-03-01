@@ -7,9 +7,9 @@ import { comparePass } from "../../helper/passEncDes";
 
 
 const Login = [
-  body("username")
+  body("email")
     .notEmpty({ ignore_whitespace: true })
-    .withMessage("User Name is required"),
+    .withMessage("email is required"),
   body("password")
     .notEmpty({ ignore_whitespace: true })
     .withMessage("password_required"),
@@ -27,14 +27,14 @@ const Login = [
       );
     }
 
-    const { username, password } = req.body;
-    const user = await UserModel.findOne({ username });
+    const { email, password } = req.body;
+    const user = await UserModel.findOne({ email });
     if (!user) {
-      return apiResponse.errorResponse(res, "Invalid username or password");
+      return apiResponse.errorResponse(res, "Invalid email or password");
     }
     const isPasswordMatch = await comparePass(password, user.password as string);
       if (!isPasswordMatch) {
-        return apiResponse.errorResponse(res, "Invalid username or password");
+        return apiResponse.errorResponse(res, "Invalid email or password");
       }
 
     return apiResponse.sendToken(res, 200 , user)

@@ -31,7 +31,7 @@ const Signup = [
 
     const { firstname, lastname, email, username, password } = req.body;
     try {
-      const existingUser = await UserModel.findOne({ username });
+      const existingUser = await UserModel.findOne({ email });
       if (existingUser) {
         return apiResponse.AlreadyExists(res, 'User alreasy exist')
       }
