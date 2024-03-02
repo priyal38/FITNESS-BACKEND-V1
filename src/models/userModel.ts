@@ -10,7 +10,7 @@ interface User extends Document {
   firstname: string;
   lastname: string;
   email: string;
-  username: string;
+ 
   password: string;
   gender: Gender;
   profilePhoto?: string;
@@ -25,7 +25,7 @@ const userSchema = new mongoose.Schema<User>({
   firstname: { type: String, required: true },
   lastname: { type: String, required: true },
   email: { type: String, required: true  , unique: true},
-  username: { type: String, required: true,  },
+ 
   password: { type: String, required: true },
   gender: { type: String, enum: Object.values(Gender) },
   profilePhoto: { type: String },

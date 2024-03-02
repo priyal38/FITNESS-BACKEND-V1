@@ -5,9 +5,7 @@ import UserModel from "../../models/userModel";
 import { encryptPass } from "../../helper/passEncDes";
 
 const Signup = [
-  body("username")
-    .notEmpty({ ignore_whitespace: true })
-    .withMessage("UserName is required"),
+ 
   body("firstname")
     .notEmpty({ ignore_whitespace: true })
     .withMessage("First Name is required"),
@@ -29,7 +27,7 @@ const Signup = [
       return apiResponse.validationErrorWithData(res,'Validation Error',errors.array(), )
     }
 
-    const { firstname, lastname, email, username, password } = req.body;
+    const { firstname, lastname, email, password } = req.body;
     try {
       const existingUser = await UserModel.findOne({ email });
       if (existingUser) {
@@ -41,7 +39,6 @@ const Signup = [
         firstname,
         lastname,
         email,
-        username,
         password: hashedPassword,
       });
     user.save();

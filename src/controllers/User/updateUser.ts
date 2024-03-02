@@ -7,7 +7,7 @@ import { body, validationResult } from 'express-validator';
     body('firstname').optional().notEmpty().withMessage('First name is required'),
     body('lastname').optional().notEmpty().withMessage('Last name is required'),
     body('email').optional().notEmpty().withMessage('Email is required').isEmail().withMessage('Invalid email'),
-    body('username').optional().notEmpty().withMessage('Username is required'),
+   
     body('gender').optional().notEmpty().withMessage('Gender is required'),
     body('profilePhoto').optional().notEmpty().withMessage('Profile photo is required'),
     body('height').optional().notEmpty().withMessage('Height is required').isNumeric().withMessage('Height must be a number'),
@@ -38,7 +38,7 @@ import { body, validationResult } from 'express-validator';
         if (req.body.firstname) user.firstname = req.body.firstname;
         if (req.body.lastname) user.lastname = req.body.lastname;
         if (req.body.email) user.email = req.body.email;
-        if (req.body.username) user.username = req.body.username;
+      
         if (req.body.gender) user.gender = req.body.gender;
         if (req.body.profilePhoto) user.profilePhoto = req.body.profilePhoto;
         if (req.body.height) user.height = req.body.height;

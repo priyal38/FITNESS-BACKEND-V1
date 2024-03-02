@@ -1,6 +1,5 @@
 import { Request, Response } from "express";
 import * as apiResponse from "../../helper/apiResponse";
-import jwt from "jsonwebtoken";
 import { body, validationResult } from "express-validator";
 import UserModel from "../../models/userModel";
 import { comparePass } from "../../helper/passEncDes";

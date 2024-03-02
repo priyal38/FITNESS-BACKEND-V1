@@ -1,6 +1,6 @@
 import express from "express";
 import addWorkout from "../controllers/Workout/addWorkoutController";
-import getAllWorkout from "../controllers/Workout/getAllWorkout";
+import getAllWorkout from "../controllers/Workout/getAllWorkoutController";
 const workout= express.Router();
 
 workout.post('/addworkout' , addWorkout);
