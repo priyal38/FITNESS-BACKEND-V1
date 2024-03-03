@@ -1,6 +1,6 @@
 import express from "express"
 import addBlogController from "../controllers/Blog/addBlogController";
-import getAllBlogs from "../controllers/Blog/getAllBlogs";
+import getAllBlogs from "../controllers/Blog/getAllBlogsController";
 
 
 

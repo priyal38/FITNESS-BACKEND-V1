@@ -5,7 +5,9 @@ import UserModel from "../../models/userModel";
 import { encryptPass } from "../../helper/passEncDes";
 
 const Signup = [
-
+  body("username")
+    .notEmpty({ ignore_whitespace: true })
+    .withMessage("UserName is required"),
   body("firstname")
     .notEmpty({ ignore_whitespace: true })
     .withMessage("First Name is required"),
@@ -39,7 +41,7 @@ const Signup = [
         firstname,
         lastname,
         email,
-        
+        username,
         password: hashedPassword,
       });
     user.save();

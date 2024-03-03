@@ -1,5 +1,5 @@
 import express from "express"
-import addRecipeController from "../controllers/HealthRecipes/addRecipe"
+import addRecipeController from "../controllers/HealthRecipes/addRecipeController"
 
 const recipe = express.Router()
 recipe.post("/addrecipe" , addRecipeController)
