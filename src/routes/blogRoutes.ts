@@ -4,8 +4,9 @@ import getAllBlogs from "../controllers/Blog/getAllBlogsController";
 
 
 
+
 const blog = express.Router();
-blog.post("/addblog" ,addBlogController )
+blog.post("/addblog",addBlogController )
 blog.get("/getblog" ,getAllBlogs )
 
 export default blog;

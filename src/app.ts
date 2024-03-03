@@ -10,8 +10,9 @@ import indexroute from './routes/index'
 connection();
  
 const app = express();
-app.use(json());
+// app.use(json());
 app.use(cors())
+app.use(express.json());
 
 app.use('/uploads' , express.static('./uploads'))
 

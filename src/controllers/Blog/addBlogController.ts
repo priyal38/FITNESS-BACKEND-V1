@@ -3,39 +3,15 @@ import { body, validationResult } from "express-validator";
 import * as apiResponse from "../../helper/apiResponse";
 import BlogModel from "../../models/blogModel";
 import { upload } from "../../helper/multerConfig";
+import schemaValidator from "../../middleware/schemaValidator";
 
 
 
 const addBlog = [
-
   upload.single('coverImg'),
-
+  schemaValidator('/addblog') ,
   
-  body("title")
-    .notEmpty({ ignore_whitespace: true })
-    .withMessage("title is required"),
-  body("content")
-    .notEmpty({ ignore_whitespace: true })
-    .withMessage("content is required"),
-  body("author")
-    .notEmpty({ ignore_whitespace: true })
-    .withMessage(" author is required"),
-  body("category")
-    .notEmpty({ ignore_whitespace: true })
-    .withMessage("category is required"),
-  body("readtime")
-    .notEmpty({ ignore_whitespace: true })
-    .withMessage("read time required"),
-
-  async (req: Request, res: Response) => {
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-      return apiResponse.validationErrorWithData(
-        res,
-        "Validation Error",
-        errors.array()
-      );
-    }
+async (req: Request, res: Response) => {
 
     const {
       title,
@@ -62,7 +38,8 @@ const addBlog = [
       console.log(error);
       apiResponse.errorResponse(res, " blog not added");
     }
-  },
-];
+  
+  }
+]
 
 export default addBlog;  

@@ -4,29 +4,9 @@ import * as apiResponse from "../../helper/apiResponse";
 import UserModel from "../../models/userModel";
 import { encryptPass } from "../../helper/passEncDes";
 
-const Signup = [
-
-  body("firstname")
-    .notEmpty({ ignore_whitespace: true })
-    .withMessage("First Name is required"),
-  body("lastname")
-    .notEmpty({ ignore_whitespace: true })
-    .withMessage("Last Name is required"),
-  body("email")
-    .notEmpty({ ignore_whitespace: true })
-    .withMessage("Email is required")
-    .isEmail()
-    .withMessage("Email is not valid"),
-  body("password")
-    .notEmpty({ ignore_whitespace: true })
-    .withMessage("password_required"),
-
+const Signup =
   async (req: Request, res: Response) => {
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-      return apiResponse.validationErrorWithData(res,'Validation Error',errors.array(), )
-    }
-
+   
     const { firstname, lastname, email, password } = req.body;
     try {
       const existingUser = await UserModel.findOne({ email });
@@ -54,7 +34,6 @@ const Signup = [
         console.log(error);
         apiResponse.errorResponse(res, 'User Not  Added')
     }
-  },
-];
+  }
 
 export default Signup;

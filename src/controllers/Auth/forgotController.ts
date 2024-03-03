@@ -1,34 +1,17 @@
 import { Request, Response } from "express";
 import * as apiResponse from "../../helper/apiResponse";
-import { body, validationResult } from "express-validator";
+
 import UserModel from "../../models/userModel";
 import { encryptPass } from "../../helper/passEncDes";
 
 
-const ForgotPassword = [
-  body("email")
-    .notEmpty({ ignore_whitespace: true })
-    .withMessage("email is required"),
-  body("password")
-    .notEmpty({ ignore_whitespace: true })
-    .withMessage("password_required"),
-  body("confirmPassword")
-    .notEmpty({ ignore_whitespace: true })
-    .withMessage("confirmpassword_required"),
+const ForgotPassword =
+ 
 
   async (req: Request, res: Response) => {
 
     try{
-
-    const error = validationResult(req);
-    if (!error.isEmpty()) {
-      apiResponse.validationErrorWithData(
-        res,
-        "Validation error",
-        error.array()
-      );
-    }
-
+      
     const { email, password ,confirmPassword} = req.body;
     const user = await UserModel.findOne({ email });
     if (!user) {
@@ -51,6 +34,6 @@ const ForgotPassword = [
 
 }
 
-];
+
 
 export default ForgotPassword;

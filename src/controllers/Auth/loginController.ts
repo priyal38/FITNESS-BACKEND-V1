@@ -5,26 +5,9 @@ import UserModel from "../../models/userModel";
 import { comparePass } from "../../helper/passEncDes";
 
 
-const Login = [
-  body("email")
-    .notEmpty({ ignore_whitespace: true })
-    .withMessage("email is required"),
-  body("password")
-    .notEmpty({ ignore_whitespace: true })
-    .withMessage("password_required"),
-
-  async (req: Request, res: Response) => {
+const Login =  async (req: Request, res: Response) => {
 
     try{
-
-    const error = validationResult(req);
-    if (!error.isEmpty()) {
-      apiResponse.validationErrorWithData(
-        res,
-        "Validation error",
-        error.array()
-      );
-    }
 
     const { email, password } = req.body;
     const user = await UserModel.findOne({ email });
@@ -46,6 +29,6 @@ const Login = [
 
 }
 
-];
+
 
 export default Login;

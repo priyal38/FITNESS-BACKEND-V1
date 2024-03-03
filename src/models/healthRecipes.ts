@@ -14,9 +14,7 @@ export interface Ingredient {
 
 }
 
-export interface Instructions{
-  step:string
-}
+
 export interface HealthyRecipes extends Document {
   title: string;
   description?: string;
@@ -26,7 +24,7 @@ export interface HealthyRecipes extends Document {
   cookTime: number;
   nutritionFacts: NutritionFacts;
   ingredients: Ingredient[];
-  instructions: Instructions[];
+  instructions: string[];
   image: string
 }
 
@@ -41,7 +39,7 @@ const HealthyRecipesSchema = new mongoose.Schema<HealthyRecipes>({
     calories: { type: Number, required: true },
     carbohydrates: { type: Number, required: true },
     protein: { type: Number, required: true },
-    fat: { type: Number, required: true }
+    totalfat: { type: Number, required: true }
 },
   ingredients: [{
   name: { type: String, required: true },
@@ -49,7 +47,7 @@ const HealthyRecipesSchema = new mongoose.Schema<HealthyRecipes>({
   unit:{ type: String }
 
   }],
-  instructions: [ {step:{ type: String, required: true }}],
+  instructions: {type:[String] , required:true},
   image: { type: String,  }
 });
 
