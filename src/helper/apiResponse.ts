@@ -66,7 +66,7 @@ export const notFoundResponse = (res: Response, msg: string) => {
 export const AlreadyExists = (res: Response, msg: string) => {
   const data = {
     status: 0,
-    code: 400,
+    code: 409,
     message: msg,
   };
   return res.status(409).json(data);

@@ -38,7 +38,7 @@ import { body, validationResult } from 'express-validator';
         if (req.body.firstname) user.firstname = req.body.firstname;
         if (req.body.lastname) user.lastname = req.body.lastname;
         if (req.body.email) user.email = req.body.email;
-        if (req.body.username) user.username = req.body.username;
+     
         if (req.body.gender) user.gender = req.body.gender;
         if (req.body.profilePhoto) user.profilePhoto = req.body.profilePhoto;
         if (req.body.height) user.height = req.body.height;
