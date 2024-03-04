@@ -30,7 +30,8 @@ const addWorkout = Joi.object().keys({
     difficultyLevel:Joi.string().required(),
     explanation:Joi.string().required(),
     videoUrl:Joi.string().required(),
-    subCategory: Joi.string().allow('').optional()
+    subCategory: Joi.string().allow('').optional(),
+    equipment:Joi.string().allow('').optional()
 })
 
 const addBlog = Joi.object().keys({

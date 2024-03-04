@@ -1,5 +1,6 @@
 import { RequestHandler } from "express";
 import schemas from "../utils/schema";
+import { Error } from "mongoose";
 
 
 const validationOptions = {
@@ -21,7 +22,7 @@ const schemaValidator = (path: string): RequestHandler => {
 
     if (error) {
    
-       return  res.status(422).send(error.details.map(err => err.message));
+       return  res.status(422).send(error.details.map((err: { message: any; }) => err.message));
     }
 
     // validation successful

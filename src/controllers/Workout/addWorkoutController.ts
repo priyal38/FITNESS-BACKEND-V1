@@ -17,6 +17,8 @@ const addWorkout = [
       explanation,
       difficultyLevel,
       videoUrl,
+      equipment
+      
     } = req.body;
     try {
       const workout = await WorkoutModel.create({
@@ -27,6 +29,7 @@ const addWorkout = [
         difficultyLevel,
         thumbnail:req.file?.path,
         videoUrl,
+        equipment
       });
       workout.save();
 

@@ -3,7 +3,8 @@ import * as apiResponse from "../../helper/apiResponse";
 import { body, validationResult } from "express-validator";
 import UserModel from "../../models/userModel";
 import { comparePass } from "../../helper/passEncDes";
-
+import jwt from "jsonwebtoken";
+const JWT_REFRESH_SECRET = "priyal";
 
 const Login =  async (req: Request, res: Response) => {
 
@@ -18,6 +19,15 @@ const Login =  async (req: Request, res: Response) => {
       if (!isPasswordMatch) {
         return apiResponse.errorResponse(res, "Invalid email or password");
       }
+
+      const refreshToken = jwt.sign({ userId: user._id}, JWT_REFRESH_SECRET, { expiresIn: '7d' });
+
+      res.cookie('refreshtoken', refreshToken, {
+        httpOnly: true,
+        secure:true,
+        sameSite:'none',
+        maxAge: 24 * 60 * 60 * 1000
+      });
 
     return apiResponse.sendToken(res, 200 , user)
    

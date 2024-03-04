@@ -7,6 +7,7 @@ interface Workout extends Document {
     subCategory:string,
     explanation:string,
     difficultyLevel:string,
+    equipment:string
     thumbnail:string,
     videoUrl:string
 }
@@ -18,6 +19,7 @@ const workoutSchema = new mongoose.Schema<Workout>({
     explanation: { type: String ,required:true},
     difficultyLevel: {type:String , required:true},
     thumbnail:{type:String , required:true},
+    equipment:{type:String},
     videoUrl: { type: String  , required:true}
 });
 

@@ -5,15 +5,21 @@ import cors from "cors";
 // import dotenv from "dotenv";
 import connection from './db';
 import indexroute from './routes/index'
+import cookieparser from "cookie-parser";
   
  
 connection();
  
 const app = express();
-// app.use(json());
-app.use(cors())
-app.use(express.json());
 
+app.use(json());
+app.use(cors(
+    {
+        origin:"http://localhost:3000",
+        credentials:true
+    }
+)); 
+app.use(cookieparser());
 app.use('/uploads' , express.static('./uploads'))
 
 

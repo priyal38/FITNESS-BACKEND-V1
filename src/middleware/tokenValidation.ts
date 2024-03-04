@@ -20,7 +20,7 @@ const verifyToken = (req: customRequest, res: Response, next: NextFunction) => {
 
         jwt.verify(token,"S2k3c0efrsfdsdsdfff2dsasdfd", (err: any, decoded: any) => {
             if (err) {
-                return apiResponse.errorResponse(res, "Token is not valid");
+                return apiResponse.unauthorizedResponse(res, "Token is not valid");
             }
             req.user = decoded.email;
             next();
