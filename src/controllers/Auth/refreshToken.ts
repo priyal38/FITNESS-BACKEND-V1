@@ -35,7 +35,7 @@ const JWT_SECRET = "S2k3c0efrsfdsdsdfff2dsasdfd";
                 return res.status(401)
             }
  
-            const token = jwt.sign({ userId: decoded._id }, JWT_SECRET , {expiresIn : "10s"});
+            const token = jwt.sign({ userId: decoded._id }, JWT_SECRET , {expiresIn : "1d"});
  
             res.json({token});
         }

@@ -14,7 +14,7 @@ export const successResponse = (res: Response, msg: string) => {
 
   export const sendToken = (res: Response, statusCode: number, user:any) => {
     const token = jwt.sign({ id: user._id },"S2k3c0efrsfdsdsdfff2dsasdfd", {
-      expiresIn: '10s',
+      expiresIn: '1d',
     });
 
     res.status(statusCode).json({
