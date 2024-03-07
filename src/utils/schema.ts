@@ -40,6 +40,7 @@ const addBlog = Joi.object().keys({
     category:Joi.string().required(),
     readtime:Joi.number().required(),
     author:Joi.string().required(),
+    subtitle:Joi.string().allow('').optional()
   
 })
   

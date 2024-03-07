@@ -18,7 +18,8 @@ async (req: Request, res: Response) => {
       content,
       author,
       category,
-      readtime
+      readtime,
+      subtitle
     } = req.body;
     try {
       const blog = await BlogModel.create({
@@ -27,7 +28,8 @@ async (req: Request, res: Response) => {
         author,
         category,
         coverImg: req.file?.path,
-        readtime
+        readtime,
+        subtitle
       });
       blog.save();
 

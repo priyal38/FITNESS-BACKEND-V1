@@ -8,9 +8,11 @@ interface Blog extends Document {
     category:string,
     coverImg:string,
     readtime:number
+    subtitle:string
   }
 const blogSchema = new mongoose.Schema<Blog>({
     title: { type: String, required: true },
+    subtitle:{type:String},
     content: { type:String , required: true },
     author: { type: String, required: true },
     category:{type:String , required:true},
