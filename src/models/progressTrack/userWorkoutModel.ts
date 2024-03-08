@@ -11,14 +11,15 @@ const userWorkoutSchema = new mongoose.Schema<UserWorkout>({
     
     userId:{type: Schema.Types.ObjectId, ref: 'User', required: true},
     predefinedWorkouts:[{
-        workoutId :{ type: Schema.Types.ObjectId ,  ref: 'User', required: true },
-        target : {type:Number , required:true},
-        completedDays : {type:Number , required:true},
+        workoutId :{ type: Schema.Types.ObjectId ,  ref: 'Workout', required: true },
+        targetDays : {type:Number , required:true},
+        completedDays : {type:Number , default:0},
+        duration:{type:Number , required:true},
         startDate : {type:Date },
         endDate :{type:Date}
     }],
     userdefinedWorkouts:[{
-        workoutId :{ type: Schema.Types.ObjectId ,  ref: 'User', required: true },
+       title:{type:String , required:true},
         target : {type:Number , required:true},
         completedDays : {type:Number , required:true},
         startDate : {type:Date },
