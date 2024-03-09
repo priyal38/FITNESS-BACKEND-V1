@@ -6,7 +6,8 @@ import PredefinedWorkoutModel from "../../models/progressTrack/predefinedWorkout
 const addPredefinedWorkout = async(req:Request , res:Response) =>{
 
     try{
-        const{userId , targetDays , duration , workoutId , startDate} = req.body
+        const userId = (req as any).user;
+        const{ targetDays , duration , workoutId , startDate} = req.body
 
         const endDate = new Date(startDate)
         endDate.setDate(endDate.getDate() + targetDays)

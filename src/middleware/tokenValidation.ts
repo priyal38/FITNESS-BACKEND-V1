@@ -22,7 +22,9 @@ const verifyToken = (req: customRequest, res: Response, next: NextFunction) => {
             if (err) {
                 return apiResponse.unauthorizedResponse(res, "Token is not valid");
             }
-            req.user = decoded.email;
+            console.log(decoded)
+            req.user = decoded.id;
+            console.log(req.user)
             next();
         });
     } catch (error) {
