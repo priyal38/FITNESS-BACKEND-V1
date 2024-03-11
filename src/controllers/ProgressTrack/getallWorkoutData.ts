@@ -1,29 +1,28 @@
 import { Request, Response } from 'express';
-import PredefinedWorkoutModel from '../../models/progressTrack/predefinedWorkout'
+import PredefinedWorkoutModel from '../../models/progressTrack/predefinedWorkout';
 import CustomWorkoutModel from '../../models/progressTrack/customWorkout';
 import * as apiResponse from "../../helper/apiResponse";
 
 const getAllWorkoutData = async (req: Request, res: Response) => {
     try {
+        const userId = (req as any).user; // Assuming this correctly holds the user ID
 
-        const predefinedWorkouts = await PredefinedWorkoutModel.find().populate('workoutId', 'title')
+        // Find predefined workouts for the user
+        const predefinedWorkouts = await PredefinedWorkoutModel.find({ userId }).populate('workoutId', 'title');
 
+        // Find custom workouts for the user
+        const customWorkouts = await CustomWorkoutModel.find({ userId });
 
-        const customWorkouts = await CustomWorkoutModel.find()
-
-
+        // Combine predefined and custom workouts
         const allWorkouts = [...predefinedWorkouts, ...customWorkouts];
 
-        if (allWorkouts) {
-            apiResponse.successResponseWithData(res, " combine workouts found", allWorkouts)
+        if (allWorkouts.length > 0) {
+            apiResponse.successResponseWithData(res, "Workouts found", allWorkouts);
+        } else {
+            apiResponse.notFoundResponse(res, "Workouts not found");
         }
-        else {
-
-            return apiResponse.notFoundResponse(res, "combine workouts not found");
-        }
-
     } catch (error) {
-        return apiResponse.errorResponseWithData(res, "Error in getting workouts", error)
+        apiResponse.errorResponseWithData(res, "Error in getting workouts", error);
     }
 };
 

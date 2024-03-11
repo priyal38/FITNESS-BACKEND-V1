@@ -10,7 +10,7 @@ import verifyToken from "../middleware/tokenValidation";
 const progress = express.Router();
 progress.post("/addpredefined", verifyToken,addPredefinedWorkout )
 progress.post("/addcustom",addCustomWorkout )
-progress.get("/getdata",getAllWorkouts )
+progress.get("/getdata",verifyToken, getAllWorkouts )
 
 
 export default progress;
