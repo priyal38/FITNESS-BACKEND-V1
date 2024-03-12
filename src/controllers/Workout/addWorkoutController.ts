@@ -42,6 +42,6 @@ const addWorkout = [
     }
   },
 ];
-
+  
 export default addWorkout;
 

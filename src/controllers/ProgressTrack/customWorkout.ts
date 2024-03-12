@@ -6,10 +6,11 @@ import CustomWorkoutModel from "../../models/progressTrack/customWorkout";
 const addCustomWorkout = async(req:Request , res:Response) =>{
 
     try{
-        const{userId , targetDays , duration , title , startDate} = req.body
+        const userId = (req as any).user
+        const{  targetDays , duration , title , startDate} = req.body
 
-        const endDate = new Date(startDate)
-        endDate.setDate(endDate.getDate() + targetDays)
+        const endDate = new Date(startDate);
+        endDate.setDate(endDate.getDate() + parseInt(targetDays));
 
 
         const newCustomWorkout  = await CustomWorkoutModel.create({

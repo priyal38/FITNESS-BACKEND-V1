@@ -8,6 +8,11 @@ interface PredefinedWorkout extends Document {
     duration:number
     startDate:Date
     endDate :Date
+    workoutType:string
+    completionStatus: {
+        date: Date;
+        checked: boolean;
+    }[];
 
 }
 
@@ -20,9 +25,13 @@ const predefinedWorkoutModel = new mongoose.Schema<PredefinedWorkout>({
         completedDays : {type:Number , default:0},
         duration:{type:Number , required:true},
         startDate : {type:Date },
-        endDate :{type:Date}
+        endDate :{type:Date},
+        workoutType:{type:String , default:"predefined"},
     
-   
+        completionStatus: [{
+            date: { type: Date, default:new Date()},
+            checked: { type: Boolean, default: false }
+        }]
 
 });
 

@@ -9,6 +9,7 @@ interface CustomWorkout extends Document {
     duration:number
     startDate:Date
     endDate :Date
+    workoutType:string
 
 }
 
@@ -21,7 +22,8 @@ const customWorkoutModel = new mongoose.Schema<CustomWorkout>({
         completedDays : {type:Number , default:0},
         duration:{type:Number , required:true},
         startDate : {type:Date },
-        endDate :{type:Date}
+        endDate :{type:Date},
+        workoutType:{type:String , default:"custom"}
     
    
 

@@ -25,11 +25,9 @@ const getWorkoutDataByDate = async (req: Request, res: Response) => {
         // Combine predefined and custom workouts
         const allWorkouts = [...predefinedWorkouts, ...customWorkouts];
 
-        if (allWorkouts.length > 0) {
+        if (allWorkouts) {
             return apiResponse.successResponseWithData(res, "Workouts found for selected date", allWorkouts);
-        } else {
-            return apiResponse.notFoundResponse(res, "No workouts found for the selected date");
-        }
+        } 
     } catch (error) {
         console.log(error);
         apiResponse.errorResponse(res, "Error in getting workouts for the selected date");

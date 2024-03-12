@@ -10,7 +10,7 @@ const addPredefinedWorkout = async(req:Request , res:Response) =>{
         const{ targetDays , duration , workoutId , startDate} = req.body
 
         const endDate = new Date(startDate)
-        endDate.setDate(endDate.getDate() + targetDays)
+        endDate.setDate(endDate.getDate() + parseInt(targetDays))
 
 
         const newPredefinedWorkout  = await PredefinedWorkoutModel.create({
