@@ -24,7 +24,7 @@ async (req: Request, res: Response) => {
     try {
       const blog = await BlogModel.create({
         title,
-        content,
+        content:JSON.parse(content),
         author,
         category,
         coverImg: req.file?.path,

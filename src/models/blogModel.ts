@@ -3,7 +3,7 @@ import mongoose , {Schema, Document} from "mongoose";
 
 interface Blog extends Document {
     title:string,
-    content:string,
+    content:string[],
     author:string,
     category:string,
     coverImg:string,
@@ -13,7 +13,7 @@ interface Blog extends Document {
 const blogSchema = new mongoose.Schema<Blog>({
     title: { type: String, required: true },
     subtitle:{type:String},
-    content: { type:String , required: true },
+    content: { type:[String] , required: true },
     author: { type: String, required: true },
     category:{type:String , required:true},
     coverImg: { type: String, required: true },
