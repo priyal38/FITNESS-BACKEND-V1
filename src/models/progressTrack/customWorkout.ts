@@ -10,6 +10,10 @@ interface CustomWorkout extends Document {
     startDate:Date
     endDate :Date
     workoutType:string
+    completionStatus: {
+        date: Date;
+        checked: boolean;
+    }[];
 
 }
 
@@ -23,7 +27,11 @@ const customWorkoutModel = new mongoose.Schema<CustomWorkout>({
         duration:{type:Number , required:true},
         startDate : {type:Date },
         endDate :{type:Date},
-        workoutType:{type:String , default:"custom"}
+        workoutType:{type:String , default:"custom"},
+        completionStatus: [{
+            date: { type: Date, default:new Date()},
+            checked: { type: Boolean, default: false }
+        }]
     
    
 

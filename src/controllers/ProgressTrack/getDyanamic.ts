@@ -16,19 +16,19 @@ const getWorkoutDataByDate = async (req: Request, res: Response) => {
             endDate: { $gte: selectedDate }
         }).populate('workoutId', 'title');
 
-        // Find custom workouts for the user where the selected date falls within the range
-        // const customWorkouts = await CustomWorkoutModel.find({
-        //     userId,
-        //     startDate: { $lte: selectedDate },
-        //     endDate: { $gte: selectedDate }
-        // });
+      
+        const customWorkouts = await CustomWorkoutModel.find({
+            userId,
+            startDate: { $lte: selectedDate },
+            endDate: { $gte: selectedDate }
+        });
 
-        // Combine predefined and custom workouts
-        // const allWorkouts = [...predefinedWorkouts, ...customWorkouts];
+    
+        const allWorkouts = [...predefinedWorkouts, ...customWorkouts];
 
-        if (predefinedWorkouts) {
+        if (allWorkouts) {
             // Check completion status for each workout for the selected date
-            const workoutsWithCompletionStatus = predefinedWorkouts.map(workout => {
+            const workoutsWithCompletionStatus = allWorkouts.map(workout => {
 
                 const completionStatus = workout.completionStatus.find(status => {
                     console.log('status.date:', status.date.toDateString());
