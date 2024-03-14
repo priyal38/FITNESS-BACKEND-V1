@@ -9,7 +9,7 @@ const JWT_SECRET = "S2k3c0efrsfdsdsdfff2dsasdfd";
  const refreshTokenGenerate = async(req:Request,res:Response)=>{
  
     const cookies = await req.cookies;
-    console.log("cookies reached")
+
    
     if (!cookies?.refreshtoken) return res.sendStatus(401);
    
@@ -23,8 +23,10 @@ const JWT_SECRET = "S2k3c0efrsfdsdsdfff2dsasdfd";
     // }
 
     if (!refreshToken) {
-        return res.status(401).send('Access Denied. No refresh token provided.');
+        return apiResponse.unauthorizedResponse(res , "Access Denied. No refresh token provided")
+      
       }
+
  
        
     jwt.verify(
@@ -32,12 +34,14 @@ const JWT_SECRET = "S2k3c0efrsfdsdsdfff2dsasdfd";
         JWT_REFRESH_SECRET,
         (err:any , decoded:any)=>{
             if(err){
-                return res.status(401)
+               
+                return apiResponse.unauthorizedResponse(res , "Refresh token is not valid")
             }
  
             const token = jwt.sign({ userId: decoded._id }, JWT_SECRET , {expiresIn : "1d"});
  
-            res.json({token});
+            // res.json({token});
+           return  apiResponse.successResponseWithData(res , 'new accesstokem' , token)
         }
     )
     }

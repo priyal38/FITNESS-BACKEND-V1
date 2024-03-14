@@ -8,7 +8,7 @@ const getWorkoutDataByDate = async (req: Request, res: Response) => {
         const userId = (req as any).user;
         const selectedDateStr = req.query.selectedDate as string;
         const selectedDate = new Date(selectedDateStr);
-        console.log(selectedDate)
+        // console.log(selectedDate)
         // Find predefined workouts for the user where the selected date falls within the range
         const predefinedWorkouts = await PredefinedWorkoutModel.find({
             userId,
@@ -31,8 +31,8 @@ const getWorkoutDataByDate = async (req: Request, res: Response) => {
             const workoutsWithCompletionStatus = allWorkouts.map(workout => {
 
                 const completionStatus = workout.completionStatus.find(status => {
-                    console.log('status.date:', status.date.toDateString());
-                    console.log('selectedDate:', new Date(selectedDate).toDateString());
+                    // console.log('status.date:', status.date.toDateString());
+                    // console.log('selectedDate:', new Date(selectedDate).toDateString());
                     return status.date.toDateString() === new Date(selectedDate).toDateString();
                 });
                

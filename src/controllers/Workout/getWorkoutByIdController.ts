@@ -2,18 +2,18 @@ import { Request , Response } from "express";
 import WorkoutModel from "../../models/workoutModel";
 import * as apiResponse from "../../helper/apiResponse";
 
-const getDynamicWorkout = async(req:Request , res:Response) =>{
+const getWorkoutById = async(req:Request , res:Response) =>{
 
-    // const id = req.params.id;
+    const id = req.params.id;
     try{
-        const workout = await WorkoutModel.findById(req.params.id);
+        const workout = await WorkoutModel.findById(id);
           if(workout){
-            apiResponse.successResponseWithData(res , "workouts found" , workout)
+            apiResponse.successResponseWithData(res , "workout found" , workout)
           }
           
             else {
                
-                return apiResponse.notFoundResponse(res, "workouts not found");
+                return apiResponse.notFoundResponse(res, "workout not found");
             }
           }
     catch(err){
@@ -22,4 +22,4 @@ const getDynamicWorkout = async(req:Request , res:Response) =>{
     }
 }
 
-export default getDynamicWorkout
+export default getWorkoutById
