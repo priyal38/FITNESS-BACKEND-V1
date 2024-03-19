@@ -6,11 +6,45 @@ const getAllWorkout = async(req:Request , res:Response) =>{
     try{
       const page = parseInt(req.query?.page as string) || 1;
       const perPage = parseInt(req.query?.perPage as string) || 6;
+      const { query  , category, subCategory, difficultyLevel } = req.query;
 
-      const totalWorkout = await WorkoutModel.countDocuments();
-      const workouts = await WorkoutModel.find()
-      .skip((page - 1) * perPage)
-      .limit(perPage);
+      let workoutQuery: any = {};
+console.log(category);
+
+      // build query 
+      if (query) {
+          const regex = new RegExp('\\b' + query + '\\b', 'i');
+          workoutQuery.$or = [
+              { title: regex },
+              { category: regex },
+              { subCategory: regex },
+              { difficultyLevel: regex },
+              { equipment: regex }
+          ];
+      }
+      if (category) workoutQuery.category = category;
+      if (subCategory) workoutQuery.subCategory = subCategory;
+      if (difficultyLevel) workoutQuery.difficultyLevel = difficultyLevel;
+
+         // Check if any of the filters are present and add them to the query
+    // if (category || subCategory || difficultyLevel) {
+    //   workoutQuery.$or = [
+    //     ...(workoutQuery.$or || []),
+    //     { category },
+    //     { subCategory },
+    //     { difficultyLevel }
+    //   ];
+    // }
+    console.log(workoutQuery);
+    
+
+      // fetch total count of matched workout
+      const totalWorkout = await WorkoutModel.countDocuments(workoutQuery);
+
+      // fetch paginated workout data
+      const workouts = await WorkoutModel.find(workoutQuery)
+          .skip((page - 1) * perPage)
+          .limit(perPage);
 
       if (workouts.length > 0) {
         apiResponse.successResponseWithData(res, "Workout found", {

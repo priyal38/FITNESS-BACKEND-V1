@@ -1,15 +1,60 @@
-import { Request , Response } from "express";
+// import { Request , Response } from "express";
+// import BlogModel from "../../models/blogModel";
+// import * as apiResponse from "../../helper/apiResponse";
+
+// const getAllBlogs = async(req:Request , res:Response) =>{
+//     try{
+
+//       const page = parseInt(req.query?.page as string) || 1;
+//         const perPage = parseInt(req.query?.perPage as string) || 3;
+          
+//         const totalBlogs = await BlogModel.countDocuments();
+//         const blogs = await BlogModel.find()
+//             .skip((page - 1) * perPage)
+//             .limit(perPage);
+
+//         if (blogs.length > 0) {
+//             apiResponse.successResponseWithData(res, "Blogs found", {
+//                 blogs,
+//                 currentPage: page,
+//                 totalPages: Math.ceil(totalBlogs / perPage)
+//             });
+//         } else {
+//             apiResponse.notFoundResponse(res, "Blogs not found");
+//         }
+//           }
+//     catch(err){
+//         return apiResponse.errorResponseWithData(res,"Error in getting blogs",err)
+
+//     }
+// }
+
+// export default getAllBlogs
+
+
+import { Request, Response } from "express";
 import BlogModel from "../../models/blogModel";
 import * as apiResponse from "../../helper/apiResponse";
 
-const getAllBlogs = async(req:Request , res:Response) =>{
-    try{
-
-      const page = parseInt(req.query?.page as string) || 1;
+const getAllBlogs = async (req: Request, res: Response) => {
+    try {
+        const page = parseInt(req.query?.page as string) || 1;
         const perPage = parseInt(req.query?.perPage as string) || 3;
-          
-        const totalBlogs = await BlogModel.countDocuments();
-        const blogs = await BlogModel.find()
+        const query = req.query?.q as string || '';
+
+        let blogQuery = BlogModel.find();
+
+        // If search query is provided, add search filter to the query
+        if (query) {
+            blogQuery = blogQuery.or([
+                { title:  { $regex: '\\b' + query + '\\b', $options: 'i' } }, // Case-insensitive search by title
+                { category:  { $regex: '\\b' + query + '\\b', $options: 'i' } } // Case-insensitive search by content
+            ]);
+        }
+
+        // Execute the query with pagination
+        const totalBlogs = await BlogModel.countDocuments(blogQuery);
+        const blogs = await blogQuery
             .skip((page - 1) * perPage)
             .limit(perPage);
 
@@ -22,11 +67,9 @@ const getAllBlogs = async(req:Request , res:Response) =>{
         } else {
             apiResponse.notFoundResponse(res, "Blogs not found");
         }
-          }
-    catch(err){
-        return apiResponse.errorResponseWithData(res,"Error in getting blogs",err)
-
+    } catch (err) {
+        return apiResponse.errorResponseWithData(res, "Error in getting blogs", err);
     }
 }
 
-export default getAllBlogs
+export default getAllBlogs;

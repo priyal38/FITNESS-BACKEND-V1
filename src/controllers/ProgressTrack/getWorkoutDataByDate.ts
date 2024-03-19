@@ -9,7 +9,7 @@ const getWorkoutDataByDate = async (req: Request, res: Response) => {
         const selectedDateStr = req.query.selectedDate as string;
         const selectedDate = new Date(selectedDateStr);
         // console.log(selectedDate)
-        // Find predefined workouts for the user where the selected date falls within the range
+        // Find predefined workouts for the  user where the selected date falls within the range
         const predefinedWorkouts = await PredefinedWorkoutModel.find({
             userId,
             startDate: { $lte: selectedDate },
