@@ -9,33 +9,37 @@ const getAllWorkout = async(req:Request , res:Response) =>{
       const { query  , category, subCategory, difficultyLevel } = req.query;
 
       let workoutQuery: any = {};
-console.log(category);
+
 
       // build query 
       if (query) {
           const regex = new RegExp('\\b' + query + '\\b', 'i');
           workoutQuery.$or = [
-              { title: regex },
+              { title: new RegExp('\\b' + query + '\\b', 'i') },
               { category: regex },
               { subCategory: regex },
               { difficultyLevel: regex },
               { equipment: regex }
           ];
       }
-      if (category) workoutQuery.category = category;
-      if (subCategory) workoutQuery.subCategory = subCategory;
-      if (difficultyLevel) workoutQuery.difficultyLevel = difficultyLevel;
 
-         // Check if any of the filters are present and add them to the query
-    // if (category || subCategory || difficultyLevel) {
-    //   workoutQuery.$or = [
-    //     ...(workoutQuery.$or || []),
-    //     { category },
-    //     { subCategory },
-    //     { difficultyLevel }
-    //   ];
-    // }
-    console.log(workoutQuery);
+     
+    if (category || subCategory || difficultyLevel) {
+        workoutQuery.$or = [];
+    
+        if (category) {
+            workoutQuery.$or.push({ category: { $in: category} });
+        }
+    
+        if (subCategory) {
+            workoutQuery.$or.push({ subCategory: { $in: subCategory }});
+        }
+    
+        if (difficultyLevel) {
+            workoutQuery.$or.push({ difficultyLevel: { $in: difficultyLevel }});
+        }
+    }
+    // console.log(workoutQuery);
     
 
       // fetch total count of matched workout
