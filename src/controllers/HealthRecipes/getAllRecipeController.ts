@@ -7,7 +7,8 @@ const getAllRecipes = async(req:Request , res:Response) =>{
 
       const page = parseInt(req.query?.page as string) || 1;
       const perPage = parseInt(req.query?.perPage as string) || 3;
-      const query = req.query?.q as string || '';
+      const query = req.query?.query as string || '';
+console.log(query);
 
       let recipeQuery = HealthyRecipesModel.find();
 
@@ -21,6 +22,7 @@ const getAllRecipes = async(req:Request , res:Response) =>{
           
       ]);
       }
+// console.log(recipeQuery);
 
 
       const totalRecipe = await HealthyRecipesModel.countDocuments(recipeQuery);

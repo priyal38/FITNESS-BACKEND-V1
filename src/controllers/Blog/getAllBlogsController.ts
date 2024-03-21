@@ -40,8 +40,7 @@ const getAllBlogs = async (req: Request, res: Response) => {
     try {
         const page = parseInt(req.query?.page as string) || 1;
         const perPage = parseInt(req.query?.perPage as string) || 3;
-        const query = req.query?.q as string || '';
-
+        const query = req.query?.query 
         let blogQuery = BlogModel.find();
 
         // If search query is provided, add search filter to the query

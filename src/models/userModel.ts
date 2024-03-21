@@ -1,9 +1,6 @@
 import mongoose, { Document } from 'mongoose';
 
-enum Gender {
-  MALE = 'male',
-  FEMALE = 'female',
-}
+
 
 
 interface User extends Document {
@@ -11,12 +8,13 @@ interface User extends Document {
   lastname: string;
   email: string;
   password: string;
-  gender: Gender;
   profilePhoto?: string;
+  gender:string
   height?: number;
   role?: number;
   dob?: Date;
   weight?: number;
+  bio:string
  
 }
 
@@ -25,12 +23,13 @@ const userSchema = new mongoose.Schema<User>({
   lastname: { type: String, required: true },
   email: { type: String, required: true  , unique: true},
   password: { type: String, required: true },
-  gender: { type: String, enum: Object.values(Gender) },
+  gender: { type: String },
   profilePhoto: { type: String },
   height: { type: Number },
   role: { type:Number , default:0 }, 
   dob: { type: Date },
   weight: { type: Number },
+  bio:{type:String}
   
 });
 

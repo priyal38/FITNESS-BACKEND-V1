@@ -7,7 +7,7 @@ import { encryptPass } from "../../helper/passEncDes";
 const Signup =
   async (req: Request, res: Response) => {
    
-    const { firstname, lastname, email, password } = req.body;
+    const { firstname, lastname, email, password  , gender , dob , height , weight , bio , profilePhoto} = req.body;
     try {
       const existingUser = await UserModel.findOne({ email });
       if (existingUser) {
@@ -19,8 +19,14 @@ const Signup =
         firstname,
         lastname,
         email,
-      
         password: hashedPassword,
+        gender:'',
+        dob:'',
+        height:'',
+        weight:'',
+        bio:'',
+        profilePhoto:''
+
       });
     user.save();
    
