@@ -8,10 +8,11 @@ const uploadProfilePhoto =  [
 
     async (req: Request, res: Response) => {
         try {
+    console.log(req?.file?.path);
     
             const userId = (req as any).user;
          
-            const user = await UserModel.findById(userId , {profilePhoto:req.file?.path} , {new:true});
+            const user = await UserModel.findByIdAndUpdate(userId , {profilePhoto:req.file?.path} , {new:true});
             if (!user) {
                 return apiResponse.notFoundResponse(res, "User not found");
             }
