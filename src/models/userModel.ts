@@ -12,7 +12,6 @@ interface User extends Document {
   gender:string
   height?: number;
   role?: number;
-  dob?: Date;
   weight?: number;
   bio:string
  
@@ -27,7 +26,7 @@ const userSchema = new mongoose.Schema<User>({
   profilePhoto: { type: String },
   height: { type: Number },
   role: { type:Number , default:0 }, 
-  dob: { type: Date },
+ 
   weight: { type: Number },
   bio:{type:String}
   

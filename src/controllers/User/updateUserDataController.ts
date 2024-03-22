@@ -34,35 +34,7 @@ const updateUserData = async (req: Request, res: Response) => {
         }
 
        
-        // if (firstname !== undefined) {
-        //     user.firstname = firstname;
-        // }
-        // if (lastname !== undefined) {
-        //     user.lastname = lastname;
-        // }
-        // if (email !== undefined) {
-        //     user.email = email;
-        // }
-        // if (gender !== undefined) {
-        //     user.gender = gender;
-        // }
-       
-        // if (height !== undefined) {
-        //     user.height = height;
-        // }
-        // if (role !== undefined) {
-        //     user.role = role;
-        // }
-        // if (dob !== undefined) {
-        //     user.dob = dob;
-        // }
-        // if (weight !== undefined) {
-        //     user.weight = weight;
-        // }
-        // if (bio !== undefined) {
-        //     user.bio = bio;
-        // }
-
+    
         // Save updated user
         await user.save();
 
