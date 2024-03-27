@@ -14,7 +14,7 @@ const getWorkoutDataByDate = async (req: Request, res: Response) => {
             startDate: { $lte: selectedDate },
             endDate: { $gte: selectedDate }
         }).populate('workoutId', 'title');
-console.log(workouts);
+
 
         if (workouts) {
             // Check completion status for each workout for the selected date
@@ -29,7 +29,7 @@ console.log(workouts);
                 };
             });
 
-            console.log(workoutsWithCompletionStatus);
+           
             
             return apiResponse.successResponseWithData(res, "Workouts found for selected date", workoutsWithCompletionStatus);
         } 
