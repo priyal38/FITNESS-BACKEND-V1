@@ -4,7 +4,7 @@ import authRoutes from './authRoutes'
 import userRoutes from './userRoutes'
 import blogRoutes from "./blogRoutes"
 import recipeRoutes from "./recipeRoutes";
-import progressRoutes from './ProgresstrackRoutes'
+import progressRoutes from './progresstrackRoutes'
 
 const app = express();
 
