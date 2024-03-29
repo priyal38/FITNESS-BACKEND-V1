@@ -5,6 +5,7 @@ import userRoutes from './userRoutes'
 import blogRoutes from "./blogRoutes"
 import recipeRoutes from "./recipeRoutes";
 import progressRoutes from './progresstrackRoutes'
+import adminRoutes from './adminRoutes'
 
 const app = express();
 
@@ -14,6 +15,7 @@ app.use("/user" , userRoutes)
 app.use("/blog" , blogRoutes)
 app.use("/recipe" , recipeRoutes)
 app.use("/progress" , progressRoutes)
+app.use("/admin" , adminRoutes)
 
 
 export default app;

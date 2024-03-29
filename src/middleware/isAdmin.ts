@@ -2,12 +2,11 @@
 import { Request, Response, NextFunction } from 'express';
 import UserModel from '../models/userModel';
 
-interface customRequest extends Request {
-    user:any;
-    }
-export const isAdmin = async (req:customRequest,res:Response,next:NextFunction)=>{
+
+ const isAdmin = async (req:Request,res:Response,next:NextFunction)=>{
     try {
-        const user = await UserModel.findById(req.user._id)
+        const userId = (req as any).user;
+        const user = await UserModel.findById(userId)
         if(user?.role !== 1){
            return res.status(400).send({
             success : false,
@@ -21,3 +20,5 @@ export const isAdmin = async (req:customRequest,res:Response,next:NextFunction)=
         console.log(error);
     }
 }
+
+export default isAdmin
