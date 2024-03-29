@@ -14,14 +14,16 @@ const updateTabledata= async (req: Request, res: Response) => {
         endDate.setDate(endDate.getDate() + (parseInt(targetDays) - 1));
 
         // Define common properties for the update
-        const updateProperties = {
+        const updateProperties :any= {
             targetDays,
             duration,
-            title,
             startDate,
             endDate
         };
 
+        if (req.body.workoutType === "custom") {
+            updateProperties.title = title;
+        }
         // Find the workout by ID and update only specified fields
         const updatedWorkout = await UserWorkoutModel.findByIdAndUpdate(
             id,

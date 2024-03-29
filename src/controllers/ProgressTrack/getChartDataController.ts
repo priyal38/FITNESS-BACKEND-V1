@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import * as apiResponse from "../../helper/apiResponse";
-import UserWorkoutModel from "../../models/progressTrack/userWorkoutModel"; // Import the combined schema
+import UserWorkoutModel from "../../models/progressTrack/userWorkoutModel"; 
 
 const getChartDataByDate = async (req: Request, res: Response) => {
     try {
@@ -9,9 +9,6 @@ const getChartDataByDate = async (req: Request, res: Response) => {
         const selectedDate = new Date(selectedDateStr);
 
         // Find workouts for the user where the selected date falls within the range
-
-       
-            
 
         const workouts = await UserWorkoutModel.find({
             userId,

@@ -1,5 +1,4 @@
 import { Request, Response } from "express";
-import { body, validationResult } from "express-validator";
 import * as apiResponse from "../../helper/apiResponse";
 import BlogModel from "../../models/blogModel";
 import { upload } from "../../helper/multerConfig";

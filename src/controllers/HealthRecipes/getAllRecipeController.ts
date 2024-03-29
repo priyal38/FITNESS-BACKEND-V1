@@ -8,7 +8,7 @@ const getAllRecipes = async(req:Request , res:Response) =>{
       const page = parseInt(req.query?.page as string) || 1;
       const perPage = parseInt(req.query?.perPage as string) || 3;
       const query = req.query?.query as string || '';
-console.log(query);
+
 
       let recipeQuery = HealthyRecipesModel.find();
 
@@ -16,9 +16,9 @@ console.log(query);
         recipeQuery = recipeQuery.or([
 
           // /b {word boundry marker} This will make sure that the search matches the query as a whole word, rather than part of a larger word.
-          { title: { $regex: '\\b' + query + '\\b', $options: 'i' } },
-          { mealType:{ $regex: '\\b' + query + '\\b', $options: 'i' } },
-          { dietaryType:{ $regex: '\\b' + query + '\\b', $options: 'i' } },
+          { title: { $regex:  query , $options: 'i' } },
+          { mealType:{ $regex:  query , $options: 'i' } },
+          { dietaryType:{ $regex:   query , $options: 'i' } },
           
       ]);
       }

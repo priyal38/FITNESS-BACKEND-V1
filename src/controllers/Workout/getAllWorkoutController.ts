@@ -6,22 +6,33 @@ const getAllWorkout = async(req:Request , res:Response) =>{
     try{
       const page = parseInt(req.query?.page as string) || 1;
       const perPage = parseInt(req.query?.perPage as string) || 6;
-      const { query  , category, subCategory, difficultyLevel } = req.query;
+      const { query  , category, subCategory, difficultyLevel } = req.query  ;
 
       let workoutQuery: any = {};
 
 
       // build query 
-      if (query) {
-          const regex = new RegExp('\\b' + query + '\\b', 'i');
-          workoutQuery.$or = [
-              { title: new RegExp('\\b' + query + '\\b', 'i') },
-              { category: regex },
-              { subCategory: regex },
-              { difficultyLevel: regex },
-              { equipment: regex }
-          ];
-      }
+    //   if (query) {
+    //       const regex = new RegExp('\\b' + query + '\\b', 'i');
+    //       workoutQuery.$or = [
+    //           { title: new RegExp('\\b' + query + '\\b', 'i') },
+    //           { category: regex },
+    //           { subCategory: regex },
+    //           { difficultyLevel: regex },
+    //           { equipment: regex }
+    //       ];
+    //   }
+
+    if (query) {
+        const regex = new RegExp( query as string, 'i');
+        workoutQuery.$or = [
+            { title: regex },
+            { category: regex },
+            { subCategory: regex },
+            { difficultyLevel: regex },
+            { equipment: regex }
+        ];
+    }
 
      
     if (category || subCategory || difficultyLevel) {

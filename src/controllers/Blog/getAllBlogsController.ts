@@ -46,8 +46,8 @@ const getAllBlogs = async (req: Request, res: Response) => {
         // If search query is provided, add search filter to the query
         if (query) {
             blogQuery = blogQuery.or([
-                { title:  { $regex: '\\b' + query + '\\b', $options: 'i' } }, // Case-insensitive search by title
-                { category:  { $regex: '\\b' + query + '\\b', $options: 'i' } } // Case-insensitive search by content
+                { title:  { $regex:  query , $options: 'i' } }, // Case-insensitive search by title
+                { category:  { $regex:query , $options: 'i' } } // Case-insensitive search by content
             ]);
         }
 

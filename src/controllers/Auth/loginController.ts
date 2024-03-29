@@ -20,7 +20,7 @@ const Login =  async (req: Request, res: Response) => {
         return apiResponse.errorResponse(res, "Invalid email or password");
       }
 
-      const refreshToken = jwt.sign({ userId: user._id}, JWT_REFRESH_SECRET, { expiresIn: '7d' });
+      const refreshToken = jwt.sign({ id: user._id}, JWT_REFRESH_SECRET, { expiresIn: '7d' });
 
       res.cookie('refreshtoken', refreshToken, {
         httpOnly: true,
