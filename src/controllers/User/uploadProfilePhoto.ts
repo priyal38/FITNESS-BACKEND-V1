@@ -8,7 +8,7 @@ const uploadProfilePhoto =  [
 
     async (req: Request, res: Response) => {
         try {
-    console.log(req?.file?.path);
+   
     
             const userId = (req as any).user;
          

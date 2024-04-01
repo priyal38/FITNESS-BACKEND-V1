@@ -31,7 +31,7 @@ const JWT_SECRET = "S2k3c0efrsfdsdsdfff2dsasdfd";
                
                 return apiResponse.unauthorizedResponse(res , "Refresh token is not valid")
             }
- console.log(decoded.id);
+ 
  
             const token = jwt.sign({ id: decoded.id }, "S2k3c0efrsfdsdsdfff2dsasdfd" , {expiresIn : "1d"});
  

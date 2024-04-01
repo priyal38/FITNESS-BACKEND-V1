@@ -8,7 +8,7 @@ interface User extends Document {
   lastname: string;
   email: string;
   password: string;
-  profilePhoto?: string;
+  profilePhoto: string | null;
   gender:string
   height?: number;
   role?: number;
