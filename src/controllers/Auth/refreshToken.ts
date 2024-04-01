@@ -16,12 +16,6 @@ const JWT_SECRET = "S2k3c0efrsfdsdsdfff2dsasdfd";
  
     const refreshToken = cookies.refreshtoken;
  
-    // const user = await User.findOne({refreshToken});
- 
-    // if(!user){
-    //     return res.status(403).json("User is not registered");
-    // }
-
     if (!refreshToken) {
         return apiResponse.unauthorizedResponse(res , "Access Denied. No refresh token provided")
       

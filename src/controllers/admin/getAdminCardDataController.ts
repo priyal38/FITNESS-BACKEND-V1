@@ -12,7 +12,7 @@ const getAdminCardData = async(req:Request,res:Response) =>{
         const workouts =  await WorkoutModel.countDocuments()
         const blogs =  await BlogModel.countDocuments()
         const recipes = await HealthyRecipesModel.countDocuments()
-        const users =  await UserModel.countDocuments({ role: { $ne: 1 } })
+        const users =  await UserModel.countDocuments({ role: { $ne: 1 } }) // ne:not equal to
         const userworkouts =  await UserWorkoutModel.countDocuments({workoutType : "predefined"})
 
 

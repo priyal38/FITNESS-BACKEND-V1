@@ -6,16 +6,10 @@ const getAllDataByUserid = async (req: Request, res: Response) => {
     try {
         const userId = (req as any).user;
 
-
-
         const workouts = await UserWorkoutModel.find({
             userId,
         })
-
         return apiResponse.successResponseWithData(res, "Workout found", workouts);
-
-
-
     }
     catch (error) {
         console.log(error);

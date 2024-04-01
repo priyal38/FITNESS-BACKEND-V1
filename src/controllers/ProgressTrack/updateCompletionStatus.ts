@@ -5,7 +5,7 @@ import { Request, Response } from "express";
 import UserWorkoutModel from "../../models/progressTrack/userWorkoutModel"; // Import the combined schema
 import * as apiResponse from "../../helper/apiResponse";
 
-// Controller function to update completion status
+
 const updateCompletionStatus = async (req: Request, res: Response) => {
     try {
         const { workoutId, completed, selectedDate } = req.body;
@@ -27,7 +27,6 @@ const updateCompletionStatus = async (req: Request, res: Response) => {
 
             workout.completionStatus = workout.completionStatus.filter(item => item.date.toString() !== new Date(selectedDate).toString());
            
-            
             workout.completedDays = workout.completionStatus.filter(item => item.checked).length;
         }
 

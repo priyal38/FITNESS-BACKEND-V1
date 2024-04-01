@@ -41,12 +41,10 @@ const updateRecipe= [
                 return apiResponse.notFoundResponse(res, "Recipe not found");
             }
     
-           
         
-            // Save updated user
             await recipe.save();
     
-            // Respond with updated user data
+          
             apiResponse.successResponseWithData(res, "Recipe updated successfully", recipe);
         } catch (err) {
             console.log(err)

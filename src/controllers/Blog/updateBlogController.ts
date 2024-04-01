@@ -37,10 +37,8 @@ const updateBlog= [
     
            
         
-            // Save updated user
             await blog.save();
     
-            // Respond with updated user data
             apiResponse.successResponseWithData(res, "Blog updated successfully", blog);
         } catch (err) {
             console.log(err)

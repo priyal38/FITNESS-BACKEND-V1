@@ -6,9 +6,9 @@ import UserWorkoutModel from "../../models/progressTrack/userWorkoutModel";
 const deleteTableData = async (req: Request, res: Response) => {
     try {
         const userId = (req as any).user;
-        const workoutId = req.params.id; // Assuming the workout ID is passed as a route parameter
+        const workoutId = req.params.id; 
         
-        // Find the workout by ID and delete it
+      
         const deletedWorkout = await UserWorkoutModel.findByIdAndDelete(workoutId);
 
         if (!deletedWorkout) {

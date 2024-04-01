@@ -15,14 +15,13 @@ const getAllRecipes = async(req:Request , res:Response) =>{
       if(query){
         recipeQuery = recipeQuery.or([
 
-          // /b {word boundry marker} This will make sure that the search matches the query as a whole word, rather than part of a larger word.
           { title: { $regex:  query , $options: 'i' } },
           { mealType:{ $regex:  query , $options: 'i' } },
           { dietaryType:{ $regex:   query , $options: 'i' } },
           
       ]);
       }
-// console.log(recipeQuery);
+
 
 
       const totalRecipe = await HealthyRecipesModel.countDocuments(recipeQuery);
